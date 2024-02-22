@@ -23,7 +23,7 @@ def predict(model_name, predict_data):
 
 
 def test_predict(model_name):
-
+    print('test_predict')
     with oracledb.connect(user=config_db.USER,
                           password=config_db.PASSWORD,
                           dsn=config_db.DSN) as connection:
