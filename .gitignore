@@ -1,0 +1,6 @@
+/.idea/
+/__pycache__/
+/pass.txt
+/FFNN_pers_data_2200000.h5
+/FFNN_pers_data_2200000/
+/config/config_db.ini

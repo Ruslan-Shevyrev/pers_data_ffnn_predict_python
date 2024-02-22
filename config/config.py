@@ -1,0 +1,3 @@
+# nn config
+INPUT_SIZE = 4000
+OUTPUT_SIZE = 6
