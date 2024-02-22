@@ -3,7 +3,7 @@ import numpy as np
 import utils
 import oracledb
 import config.config_db as config_db
-import SQL
+import sql
 
 
 def predict(model_name, predict_data):
@@ -34,4 +34,3 @@ def test_predict(model_name):
                                        class_check_id=int(predict_result[0]),
                                        record_id=int(r[1]))
                     connection.commit()
-
