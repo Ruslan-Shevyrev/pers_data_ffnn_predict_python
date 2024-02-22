@@ -1,7 +1,15 @@
 PREDICT_SELECT = ("SELECT VAL, RECORD_ID "
                   "FROM DBRECORDS "
-                  "WHERE ROWNUM <= 10 ")
+                  "WHERE CLASS_CHECK_ID IS NULL")
+
+PREDICT_UPDATE = ("UPDATE DBRECORDS "
+                  "SET CLASS_CHECK_ID = :class_check_id "
+                  "WHERE RECORD_ID = :record_id")
 
 
 def get_predict_select():
     return PREDICT_SELECT
+
+
+def get_predict_update():
+    return PREDICT_UPDATE
