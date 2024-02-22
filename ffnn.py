@@ -15,7 +15,7 @@ def predict(model_name, predict_data):
         predict_arr.append(predict_data)
 
     print('predict_data = ' + predict_data)
-    print('predict_arr = ' + predict_arr)
+    print('predict_arr = ' + predict_arr[1])
     predict_arr = list(map(utils.str_to_arr, predict_arr))
 
     predict_arr = tf.stack(predict_arr)
