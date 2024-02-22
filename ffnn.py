@@ -7,27 +7,21 @@ import sql
 
 
 def predict(model_name, predict_data):
-    print('predict')
     predict_arr = list()
     if type(predict_data) is list:
         predict_arr = predict_data
     else:
         predict_arr.append(predict_data)
 
-    print('predict_data = ' + predict_data)
-    print('predict_arr = ' + predict_arr[0])
     predict_arr = list(map(utils.str_to_arr, predict_arr))
 
     predict_arr = tf.stack(predict_arr)
 
-    print('model start ' + model_name)
     model = tf.keras.models.load_model(model_name)
-    print('model end')
     return list(map(np.argmax, model.predict(predict_arr)))
 
 
 def test_predict(model_name):
-    print('test_predict')
     with oracledb.connect(user=config_db.USER,
                           password=config_db.PASSWORD,
                           dsn=config_db.DSN) as connection:
