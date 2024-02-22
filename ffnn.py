@@ -17,6 +17,7 @@ def predict(model_name, predict_data):
 
     predict_arr = tf.stack(predict_arr)
 
+    print(predict_arr)
     model = tf.keras.models.load_model(model_name)
     return list(map(np.argmax, model.predict(predict_arr)))
 
