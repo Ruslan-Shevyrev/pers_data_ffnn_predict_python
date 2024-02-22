@@ -20,8 +20,9 @@ def predict(model_name, predict_data):
 
     predict_arr = tf.stack(predict_arr)
 
-    print('model')
+    print('model start ' + model_name)
     model = tf.keras.models.load_model(model_name)
+    print('model end')
     return list(map(np.argmax, model.predict(predict_arr)))
 
 
