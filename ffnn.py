@@ -7,6 +7,7 @@ import sql
 
 
 def predict(model_name, predict_data):
+    print('predict')
     predict_arr = list()
     if type(predict_data) is list:
         predict_arr = predict_data
