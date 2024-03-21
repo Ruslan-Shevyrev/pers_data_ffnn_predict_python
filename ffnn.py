@@ -27,20 +27,6 @@ def predict_model_name(model_name, predict_data):
     model = tf.keras.models.load_model(model_name)
     return predict(model, predict_data)
 
-    '''predict_arr = list()
-    if type(predict_data) is list:
-        predict_arr = predict_data
-    else:
-        predict_arr.append(predict_data)
-
-    predict_arr = list(map(utils.str_to_arr, predict_arr))
-
-    predict_arr = tf.stack(predict_arr)
-
-    model = tf.keras.models.load_model(model_name)
-    return list(map(np.argmax, model.predict(predict_arr)))
-    '''
-
 
 def test_predict(model_name):
 
@@ -59,6 +45,9 @@ def test_predict(model_name):
                                         container_num=int(sql.CONTAINER_NUM)):
                     sql.RECORDS_OFFSET = str(r[0])
                     sql.RECORDS_COUNT = str(r[1])
+                    print('Running in parallel mode: from '+sql.RECORDS_OFFSET+' to '+sql.RECORDS_COUNT)
+            else:
+                print('Running in single mode')
 
             for r in cursor.execute(sql.get_predict_select()):
                 predict_result = predict(model, r[0])
