@@ -35,6 +35,8 @@ def test_predict(model_name):
 
     model = tf.keras.models.load_model(model_name)
 
+    prev_id = ''
+
     with oracledb.connect(user=config_db.USER,
                           password=config_db.PASSWORD,
                           dsn=config_db.DSN) as connection:
@@ -49,10 +51,14 @@ def test_predict(model_name):
             else:
                 print('Running in single mode')
 
-            for r in cursor.execute(sql.get_predict_select()):
-                predict_result = predict(model, r[0])
-                with connection.cursor() as cursor_upd:
-                    cursor_upd.execute(sql.get_predict_update(),
-                                       class_check_id=int(predict_result[0]),
-                                       record_id=int(r[1]))
-                    connection.commit()
+            try:
+                for r in cursor.execute(sql.get_predict_select()):
+                    predict_result = predict(model, r[0])
+                    with connection.cursor() as cursor_upd:
+                        cursor_upd.execute(sql.get_predict_update(),
+                                           class_check_id=int(predict_result[0]),
+                                           record_id=int(r[1]))
+                        connection.commit()
+                        prev_id = r[1]
+            except Exception:
+                print('Error: previous id:' + prev_id)
