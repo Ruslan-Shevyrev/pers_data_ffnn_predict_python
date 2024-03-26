@@ -60,5 +60,5 @@ def test_predict(model_name):
                                            record_id=int(r[1]))
                         connection.commit()
                         prev_id = r[1]
-            except Exception:
-                print('Error: previous id:' + prev_id)
+            except UnicodeDecodeError:
+                print('UnicodeDecodeError: previous id:' + prev_id)
