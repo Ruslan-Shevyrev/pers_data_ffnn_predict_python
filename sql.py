@@ -17,9 +17,9 @@ PREDICT_UPDATE = ("UPDATE DBRECORDS "
                   "WHERE RECORD_ID = :record_id")
 
 
-CONTAINER_RECORDS_COUNT = ("SELECT (trunc((max(RECORD_ID) - min(RECORD_ID)) / :containers_cnt) + 1) * (:container_num - 1) AS RECORDS_OFFSET, "
-                           "(trunc((max(RECORD_ID) - min(RECORD_ID)) / :containers_cnt) + 1) * :container_num AS RECORDS_COUNT "
-                           "FROM V_DBRECORDS_FOR_PREDICT")
+CONTAINER_RECORDS_COUNT = ("SELECT (trunc((SELECT COUNT(*) FROM V_DBRECORDS_FOR_PREDICT)/ :containers_cnt) + 1) * (:container_num - 1) AS RECORDS_OFFSET, "
+                           "(trunc((SELECT COUNT(*) FROM V_DBRECORDS_FOR_PREDICT) / :containers_cnt) + 1) * :container_num AS RECORDS_COUNT "
+                            "FROM DUAL ")
 
 
 def get_predict_select():
